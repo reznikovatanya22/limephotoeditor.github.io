@@ -134,4 +134,5 @@ chooseImgBtn.addEventListener("click", () => fileInput.click());
 
 Telegram.WebApp.onEvent("mainButtonClicked", function(){
 	tg.sendData(saveImage);
+	tg.download(saveImage);
 });
