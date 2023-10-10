@@ -5,6 +5,8 @@ tg.expand();
 tg.MainButton.textColor = '#FFFFFF';
 tg.MainButton.color = '#2cab37';
 
+let item = "";
+
 const fileInput = document.querySelector(".file-input"),
 filterOptions = document.querySelectorAll(".filter button"),
 filterName = document.querySelector(".filter-info .name"),
@@ -27,6 +29,9 @@ const loadImage = () => {
         resetFilterBtn.click();
         document.querySelector(".container").classList.remove("disable");
     });
+
+    tg.MainButton.setText("Download");
+    tg.MainButton.show();
 }
 
 const applyFilter = () => {
@@ -113,14 +118,13 @@ const saveImage = () => {
     ctx.drawImage(previewImg, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
     
     const link = document.createElement("a");
-    link.download = "image.jpg";
+    photoName = link.download = "image.jpg";
+	
+    item = photoName;
+	
     link.href = canvas.toDataURL();
     link.click();
 }
-
-Telegram.WebApp.onEvent("mainButtonClicked", function(){
-	tg.sendData(saveImage);
-});
 
 filterSlider.addEventListener("input", updateFilter);
 resetFilterBtn.addEventListener("click", resetFilter);
@@ -128,4 +132,6 @@ saveImgBtn.addEventListener("click", saveImage);
 fileInput.addEventListener("change", loadImage);
 chooseImgBtn.addEventListener("click", () => fileInput.click());
 
-
+Telegram.WebApp.onEvent("mainButtonClicked", function(){
+	tg.sendData(item);
+});
