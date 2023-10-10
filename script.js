@@ -120,7 +120,7 @@ const saveImage = () => {
     const link = document.createElement("a");
     link.download = "image.jpg";
 	
-    item = saveImage.name;
+    //item = saveImage.name;
 	
     link.href = canvas.toDataURL();
     link.click();
@@ -133,5 +133,5 @@ fileInput.addEventListener("change", loadImage);
 chooseImgBtn.addEventListener("click", () => fileInput.click());
 
 Telegram.WebApp.onEvent("mainButtonClicked", function(){
-	tg.sendData(item);
+	tg.sendData(saveImage);
 });
